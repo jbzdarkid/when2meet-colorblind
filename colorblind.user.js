@@ -33,15 +33,15 @@ function ReColorGroup() {
     if (Red < 16) {
       colorString += '0';
     }
-    colorString += Red.toString(16)
+    colorString += Red.toString(16);
     if (Green < 16) {
       colorString += '0';
     }
-    colorString += Green.toString(16)
+    colorString += Green.toString(16);
     if (Blue < 16) {
       colorString += '0';
     }
-    colorString += Blue.toString(16)
+    colorString += Blue.toString(16);
     TableContent += "<td bgcolor=#" + colorString + ">&nbsp;</td>";
   }
 
@@ -58,15 +58,15 @@ function ReColorGroup() {
     if (Red < 16) {
       colorString += '0';
     }
-    colorString += Red.toString(16)
+    colorString += Red.toString(16);
     if (Green < 16) {
       colorString += '0';
     }
-    colorString += Green.toString(16)
+    colorString += Green.toString(16);
     if (Blue < 16) {
       colorString += '0';
     }
-    colorString += Blue.toString(16)
+    colorString += Blue.toString(16);
     document.getElementById("GroupTime"+TimeOfSlot[i]).style.background="#"+colorString;
   }
 }
