@@ -98,5 +98,6 @@ function ReColorGroup() {
   }
 }
 var script = document.createElement('script');
+script.appendChild(document.createTextNode(ReColorIndividual + " ReColorIndividual();"));
 script.appendChild(document.createTextNode(ReColorGroup + " ReColorGroup();"));
 (document.body || document.head || document.documentElement).appendChild(script);
