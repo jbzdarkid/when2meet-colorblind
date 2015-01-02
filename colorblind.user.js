@@ -1,6 +1,33 @@
 // ==UserScript==
 // @match http://*.when2meet.com/*
 // ==/UserScript==
+function ReColorIndividual() {
+  for (var i=0;i<TimeOfSlot.length;i++) {
+    if (FromCol<ToCol) { ColA=FromCol; ColB=ToCol; } else { ColA=ToCol; ColB=FromCol; }
+    if (FromRow<ToRow) { RowA=FromRow; RowB=ToRow; } else { RowA=ToRow; RowB=FromRow; }
+
+    var WithinX = ((ColA<=Col[i])&&(Col[i]<=ColB));
+    var WithinY = ((RowA<=Row[i])&&(Row[i]<=RowB));
+
+    if (ChangeToAvailable) NewColor="blue"; else NewColor="white";
+    if (WithinX && WithinY && IsMouseDown) {
+      document.getElementById("YouTime"+TimeOfSlot[i]).style.background=NewColor;
+      document.getElementById("YouTime"+TimeOfSlot[i]).style.borderColor=NewColor;
+      if (ColA==Col[i]) document.getElementById("YouTime"+TimeOfSlot[i]).style.borderLeftColor="black";
+      if (ColB==Col[i]) document.getElementById("YouTime"+TimeOfSlot[i]).style.borderRightColor="black";
+      if (RowA==Row[i]) document.getElementById("YouTime"+TimeOfSlot[i]).style.borderTopColor="black";
+      if (RowB==Row[i]) document.getElementById("YouTime"+TimeOfSlot[i]).style.borderBottomColor="black";
+    } else {
+      if (-1 != AvailableAtSlot[i].indexOf(UserID) ) {
+        document.getElementById("YouTime"+TimeOfSlot[i]).style.background="blue";
+        document.getElementById("YouTime"+TimeOfSlot[i]).style.borderColor="black";          
+      } else {
+        document.getElementById("YouTime"+TimeOfSlot[i]).style.background="white";
+        document.getElementById("YouTime"+TimeOfSlot[i]).style.borderColor="black";
+      }
+    }
+  }
+}
 function ReColorGroup() {
   var MinAvailable = 10000; var MaxAvailable=0;
   var SelfIsAvailable = false;
