@@ -1,5 +1,6 @@
 // ==UserScript==
 // @match http://*.when2meet.com/*
+// @version 1.1
 // ==/UserScript==
 function ReColorIndividual() {
   for (var i=0;i<TimeOfSlot.length;i++) {
@@ -20,7 +21,7 @@ function ReColorIndividual() {
     } else {
       if (-1 != AvailableAtSlot[i].indexOf(UserID) ) {
         document.getElementById("YouTime"+TimeOfSlot[i]).style.background="blue";
-        document.getElementById("YouTime"+TimeOfSlot[i]).style.borderColor="black";          
+        document.getElementById("YouTime"+TimeOfSlot[i]).style.borderColor="black";
       } else {
         document.getElementById("YouTime"+TimeOfSlot[i]).style.background="white";
         document.getElementById("YouTime"+TimeOfSlot[i]).style.borderColor="black";
@@ -97,7 +98,45 @@ function ReColorGroup() {
     document.getElementById("GroupTime"+TimeOfSlot[i]).style.background="#"+colorString;
   }
 }
+function ReColor() {
+  for (Row=1;Row<=6;Row++) {
+    for (Column=1;Column<=7;Column++) {
+      if ((WriteMode!="") && ((AnchorRow-Row)*(Row-HoverRow)>=0) && ((AnchorColumn-Column)*(Column-HoverColumn)>=0)) {
+
+        if (WriteMode == "write") {
+          document.getElementById("Day-"+Row+"-"+Column).style.backgroundColor='blue';
+          document.getElementById("Day-"+Row+"-"+Column).style.color='white';
+        } else {
+          document.getElementById("Day-"+Row+"-"+Column).style.backgroundColor='white';
+          document.getElementById("Day-"+Row+"-"+Column).style.color='black';
+        }
+        document.getElementById("Day-"+Row+"-"+Column).style.border='0px solid black';
+        document.getElementById("Day-"+Row+"-"+Column).style.padding='4px';
+        document.getElementById("Day-"+Row+"-"+Column).style.margin='0px';
+      } else {
+        document.getElementById("Day-"+Row+"-"+Column).style.border='1px solid black';
+        document.getElementById("Day-"+Row+"-"+Column).style.padding='2px';
+        document.getElementById("Day-"+Row+"-"+Column).style.margin='1px';
+
+        if (ArraySearch(Dates,document.getElementById("DateOf-"+Row+"-"+Column).value)) {
+          document.getElementById("Day-"+Row+"-"+Column).style.backgroundColor='blue';
+          document.getElementById("Day-"+Row+"-"+Column).style.color='white';
+        } else {
+          document.getElementById("Day-"+Row+"-"+Column).style.backgroundColor='white';
+          document.getElementById("Day-"+Row+"-"+Column).style.color='black';
+        }
+
+      }
+    }
+  }
+}
 var script = document.createElement('script');
 script.appendChild(document.createTextNode(ReColorIndividual + " ReColorIndividual();"));
 script.appendChild(document.createTextNode(ReColorGroup + " ReColorGroup();"));
+script.appendChild(document.createTextNode(ReColor + " ReColor();"));
 (document.body || document.head || document.documentElement).appendChild(script);
+
+var label = document.getElementById('YouGrid');
+var targets = label.getElementsByTagName('td');
+targets[0].setAttribute('bgcolor', 'white');
+targets[1].setAttribute('bgcolor', 'blue');
